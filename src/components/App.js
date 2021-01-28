@@ -6,10 +6,12 @@ function App() {
   const auth = authService;
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser);
+  const [userObj, setuserObj] = useState(null);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLoggedIn(true);
+        setuserObj(user);
       }
       else {
         setIsLoggedIn(false);
@@ -18,7 +20,7 @@ function App() {
     })
   }, []);
   return (
-    init ? <Routin isLoggedIn={isLoggedIn}/> : "Loading..."
+    init ? <Routin isLoggedIn={isLoggedIn} userObj={userObj}/> : "Loading..."
   );
 }
 
